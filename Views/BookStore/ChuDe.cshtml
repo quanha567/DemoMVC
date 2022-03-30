@@ -1,0 +1,8 @@
+﻿@model IEnumerable<DemoMVC.Models.CHUDE>
+
+@foreach(var item in Model)
+{ 
+    <li class="list-group-item">
+        @Html.ActionLink(item.TenChuDe, "SanPhamTheoChuDe", "BookStore", new { id = item.MaCD }, new { @class = "text-decoration-none text-info" })
+    </li>
+}

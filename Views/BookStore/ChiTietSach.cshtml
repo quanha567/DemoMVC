@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietSach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h2 class="text-center text-danger mb-4">Thông Tin Chi Tiết Sách</h2>
+    <div class="row" style="height: 300px;">
+        <div class="col-md-4">
+            <img src="~/Content/img/product/@Model.Anhbia" class="d-block w-100" style="object-fit: cover;"/>
+        </div>
+        <div class="col-md-8">
+            <h4 class="text-info mb-4">@Model.Tensach</h4>
+            <p class="mb-4"><b>Mô tả: </b><i>@Model.Mota</i></p>
+            <p><b>Giá bán: </b><span class="text-danger">@Html.FormatValue(@Model.Giaban, "{0:0,0}") Vnđ</span></p>
+            <a href="#" class="btn btn-outline-info">Mua ngay</a>
+        </div>
+    </div>
+</div>
