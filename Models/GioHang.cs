@@ -24,7 +24,7 @@ namespace DemoMVC.Models
             SACH sach = db.SACHes.Single(a => a.Masach == iMaSach);
             sTenSach = sach.Tensach;
             sAnhBia = sach.Anhbia;
-            dDonGia = double.Parse(sach.Giaban.ToString());
+            dDonGia = Convert.ToDouble(sach.Giaban.ToString());
             iSoLuong = 1;
         }
     }

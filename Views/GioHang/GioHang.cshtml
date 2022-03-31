@@ -6,32 +6,52 @@
 }
 
 <div class="row">
+    <div class="text-danger text-center mb-4" style="font-size: 25px;">Danh sách giỏ hàng</div>
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Ma Sach</th>
-                <th scope="col">Ten Sach</th>
-                <th scope="col">Anh Bia</th>
-                <th scope="col">So Luong</th>
-                <th scope="col">Don Gia</th>
-                <th scope="col">Thanh Tien</th>
+                <th scope="col" class="text-center">#ID</th>
+                <th scope="col" class="text-center w-50">Tên sách</th>
+                <th scope="col" class="text-center">Số lượng</th>
+                <th scope="col" class="text-center">Đơn giá</th>
+                <th scope="col" class="text-center">Thành tiền</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td colspan="7" style="text-align: right;">
+                    @Html.ActionLink("Xóa tất cả sản phẩm", "XoaTatCaGioHang", null,new { @class="btn btn-primary"})
+                </td>
+            </tr>
             @foreach(var item in Model)
             {
-                <tr>
-                    <td>@item.iMaSach</td>
-                    <td>@item.sTenSach</td>
-                    <td><img src="~/Content/img/@item.sAnhBia"/></td>
-                    <td>@item.iSoLuong</td>
-                    <td>@String.Format("0:0,0", item.dDonGia)</td>
-                    <td>@String.Format("0:0,0", item.dThanhTien)</td>
-                </tr>
+            <tr>
+                <td class="text-center">@item.iMaSach</td>
+                <td class="p-0">
+                    <a class="row text-decoration-none" href="@Url.Action("ChiTietSach", "BookStore", new { id = item.iMaSach})">
+                        <img src="~/Content/img/product/@item.sAnhBia" class="col-md-2" style="object-fit: contain; height: 100%;" />
+                        <span class="col-md-10">@item.sTenSach</span>
+                    </a>
+                </td>
+                @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSach = item.iMaSach}))
+                {
+                    <td class="text-center">
+                        <input value="@item.iSoLuong" type="number" min="1" name="soluong" class="text-center   " />
+                    </td>
+                    <td class="text-center">@String.Format("{0:0,0}đ", item.dDonGia)</td>
+                    <td class="text-center">@String.Format("{0:0,0}đ", item.dThanhTien)</td>
+                    <td class="text-center">@Html.ActionLink("Xóa", "XoaSanPham", new { @iMaSach = item.iMaSach })</td>
+                    <td>
+                        <button type="submit" class="text-center btn btn-primary">Cập nhật</button>
+                    </td>
+                }
+            </tr>
             }
             <tr>
-                <td colspan="3">Tong So Luong Sach: @ViewBag.TongSoLuong</td>
-                <td colspan="3">Tong Tien: @String.Format("0:0,0", ViewBag.TongTien)</td>
+                <td colspan="4" class="text-danger">Tổng số lượng sách: @ViewBag.TongSoLuong</td>
+                <td colspan="3" class="text-center text-danger">Tổng tiền: @String.Format("{0:0,0}đ", ViewBag.TongTien)</td>
             </tr>
         </tbody>
     </table>

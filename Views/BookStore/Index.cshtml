@@ -11,7 +11,7 @@
         @foreach (var item in Model)
         {
             <div class="col-lg-3 col-md-6 col-sm-6 mb-4 d-flex">
-                <a href="@Url.Action("ChiTietSach", "BookStore", new { id = item.Masach})" class="text-decoration-none" style="flex: 1;">
+                <a href="@Url.Action("ChiTietSach", "BookStore", new { id = item.Masach})" class="text-decoration-none d-flex flex-column" style="flex: 1;">
                     <div class="card">
                         <img src="~/Content/img/product/@item.Anhbia" class="card-img-top" alt="@item.Mota">
                         <div class="card-body" style="display: flex; flex-direction: column">
@@ -26,8 +26,8 @@
                                 word-break: break-word;">
                                 @item.Tensach
                             </h5>
-                            <p class="card-text text-danger text-center">@Html.FormatValue(@item.Giaban, "{0:0,0}") <span>Vnđ</span></p>
-                            <a href="@Url.Action("ThemGioHang", "GioHang", new { @iMaSach = item.Masach, @strURl = Request.Url.ToString()})" class="btn btn-outline-info">Dat Mua</a>
+                            <p class="card-text text-danger text-center mb-2">@Html.FormatValue(@item.Giaban, "{0:0,0}đ")</p>
+                            <a href="@Url.Action("ThemGioHang", "GioHang", new { @iMaSach = item.Masach, @strURl = Request.Url.ToString()})" class="btn btn-outline-info">Mua Ngay</a>
                         </div>
                     </div>
                 </a>

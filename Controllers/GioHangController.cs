@@ -74,5 +74,48 @@ namespace DemoMVC.Controllers
 
             return View(giohang);
         }
+
+        public ActionResult ThongTinGioHang()
+        {
+            ViewBag.TongSoLuong = TinhTongSoLuong();
+            return PartialView();
+        }
+
+        public ActionResult XoaSanPham(int iMaSach)
+        {
+            List<GioHang> giohang = LayGioHang();
+
+            GioHang sanpham = giohang.SingleOrDefault(a => a.iMaSach == iMaSach);
+            if(sanpham != null)
+            {
+                giohang.RemoveAll(a => a.iMaSach == iMaSach);
+                return RedirectToAction("GioHang");
+            }
+            if(giohang.Count == 0)
+            {
+                return RedirectToAction("Index", "BookStore");
+            }
+
+            return RedirectToAction("GioHang");
+        }
+
+        public ActionResult CapNhatGiohang(int iMaSach, FormCollection col)
+        {
+            List<GioHang> giohang = LayGioHang();
+            GioHang sanpham = giohang.SingleOrDefault(a => a.iMaSach == iMaSach);
+            if(sanpham != null)
+            {
+                sanpham.iSoLuong = Convert.ToInt32(col["soluong"].ToString());
+            }
+            return RedirectToAction("GioHang");
+        }
+
+        public ActionResult XoaTatCaGioHang()
+        {
+            List<GioHang> giohang = LayGioHang();
+            giohang.Clear();
+
+            return RedirectToAction("Index", "BookStore");
+        }
     }
 }

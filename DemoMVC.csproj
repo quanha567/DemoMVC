@@ -193,6 +193,7 @@
     <Content Include="Views\NguoiDung\Index.cshtml" />
     <Content Include="Views\NguoiDung\DangNhap.cshtml" />
     <Content Include="Views\GioHang\GioHang.cshtml" />
+    <Content Include="Views\GioHang\ThongTinGioHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

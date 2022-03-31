@@ -1,10 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "DangNhap";
+    ViewBag.Title = "Đăng Nhập";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.ThongBao</h2>
+<div>
+    <h3 class="text-center text-danger">Đăng Nhập</h3>
+</div>
 
 <div class="row">
     @using (Html.BeginForm())
@@ -13,17 +15,18 @@
         {
             <div class="form-floating mb-3">
                 <input type="text" name="tendangnhap" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Ten dang nhap</label>
-                @ViewData["loi1"]
+                <label for="floatingInput">Tên đăng nhập</label>
+                <i class="text-danger">@ViewData["loi1"]</i>
             </div>
             <div class="form-floating">
                 <input type="password" name="matkhau" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Mat Khau</label>
-                @ViewData["loi2"]
+                <label for="floatingPassword">Mật khẩu</label>
+                <i class="text-danger">@ViewData["loi2"]</i>
             </div>
             <div class="col-auto mt-4">
-                <button type="submit" class="btn btn-primary mb-3">Dang Nhap</button>
+                <button type="submit" class="btn btn-primary mb-3">Đăng nhập</button>
             </div>
         }
     }
+    <i class="text-danger">@ViewBag.ThongBao</i>
 </div>

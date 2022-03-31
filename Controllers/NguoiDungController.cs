@@ -55,20 +55,20 @@ namespace DemoMVC.Controllers
 
             if (String.IsNullOrEmpty(tendn))
             {
-                ViewData["loi1"] = "Phai nhap ten tai khoan";
+                ViewData["loi1"] = "Tên đăng nhập không được bỏ trống!";
             } else if(String.IsNullOrEmpty(matkhau))
             {
-                ViewData["loi2"] = "Phai nhap mat khau";
+                ViewData["loi2"] = "Mật khẩu không được bỏ trống!";
             } else
             {
                 KHACHHANG user = db.KHACHHANGs.SingleOrDefault(a => a.Taikhoan == tendn && a.Matkhau == matkhau);
                 if(user == null)
                 {
-                    ViewBag.ThongBao = "Ten dang nhap hoac mat khau khong dung!";
+                    ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
                 }
                 else
                 {
-                    ViewBag.ThongBao = "Chuc mung dang nhap thanh cong";
+                    ViewBag.ThongBao = "Chúc mừng đăng nhập thành công!";
                     Session["UserInfo"] = user;
                 }
             }
