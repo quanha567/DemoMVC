@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DemoMVC.Models.SACH> 
+﻿@model IEnumerable<DemoMVC.Models.SACH>
 
 @{
     ViewBag.Title = "Index";
@@ -11,23 +11,23 @@
         @foreach (var item in Model)
         {
             <div class="col-lg-3 col-md-6 col-sm-6 mb-4 d-flex">
-                <a href="@Url.Action("ChiTietSach", "BookStore", new { id = item.Masach})" class="text-decoration-none">
+                <a href="@Url.Action("ChiTietSach", "BookStore", new { id = item.Masach})" class="text-decoration-none" style="flex: 1;">
                     <div class="card">
                         <img src="~/Content/img/product/@item.Anhbia" class="card-img-top" alt="@item.Mota">
                         <div class="card-body" style="display: flex; flex-direction: column">
                             <h5 class="card-title text-center"
                                 style="flex: 1;
-                    font-size: 16px;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    word-break: break-word;">
+                                font-size: 16px;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                word-break: break-word;">
                                 @item.Tensach
                             </h5>
                             <p class="card-text text-danger text-center">@Html.FormatValue(@item.Giaban, "{0:0,0}") <span>Vnđ</span></p>
-                            <a href="#" class="btn btn-outline-info">Mua ngay</a>
+                            <a href="@Url.Action("ThemGioHang", "GioHang", new { @iMaSach = item.Masach, @strURl = Request.Url.ToString()})" class="btn btn-outline-info">Dat Mua</a>
                         </div>
                     </div>
                 </a>

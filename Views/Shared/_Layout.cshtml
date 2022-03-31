@@ -10,10 +10,6 @@
         .card:hover {
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
         }
-
-        .card:hover .card-title {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body class="container">
@@ -31,7 +27,9 @@
                     </ul>
                 </div>
                 <div>
-                    <a href="@Url.Action("Dangky", "NguoiDung")" class="text-light text-decoration-none" style="font-weight: 500; font-size: 16px">Đăng Ký</a>
+                    <a href="@Url.Action("Create", "NguoiDung")" class="text-light text-decoration-none" style="font-weight: 500; font-size: 16px">Đăng Ký</a>
+                    <a href="@Url.Action("DangNhap", "NguoiDung")" class="text-light text-decoration-none" style="font-weight: 500; font-size: 16px">||Đăng Nhập ||</a>
+                    <a href="@Url.Action("GioHang", "GioHang")" class="text-light text-decoration-none" style="font-weight: 500; font-size: 16px">GioHang</a>
                 </div>
             </div>
         </nav>

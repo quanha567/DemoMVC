@@ -4,5 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DangNhap</h2>
+<h2>@ViewBag.ThongBao</h2>
 
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        {
+            <div class="form-floating mb-3">
+                <input type="text" name="tendangnhap" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Ten dang nhap</label>
+                @ViewData["loi1"]
+            </div>
+            <div class="form-floating">
+                <input type="password" name="matkhau" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Mat Khau</label>
+                @ViewData["loi2"]
+            </div>
+            <div class="col-auto mt-4">
+                <button type="submit" class="btn btn-primary mb-3">Dang Nhap</button>
+            </div>
+        }
+    }
+</div>

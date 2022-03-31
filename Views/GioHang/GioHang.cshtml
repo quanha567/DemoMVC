@@ -1,0 +1,38 @@
+﻿@using DemoMVC.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Ma Sach</th>
+                <th scope="col">Ten Sach</th>
+                <th scope="col">Anh Bia</th>
+                <th scope="col">So Luong</th>
+                <th scope="col">Don Gia</th>
+                <th scope="col">Thanh Tien</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.iMaSach</td>
+                    <td>@item.sTenSach</td>
+                    <td><img src="~/Content/img/@item.sAnhBia"/></td>
+                    <td>@item.iSoLuong</td>
+                    <td>@String.Format("0:0,0", item.dDonGia)</td>
+                    <td>@String.Format("0:0,0", item.dThanhTien)</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3">Tong So Luong Sach: @ViewBag.TongSoLuong</td>
+                <td colspan="3">Tong Tien: @String.Format("0:0,0", ViewBag.TongTien)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

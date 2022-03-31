@@ -76,3 +76,8 @@ D:\DemoMVC\obj\Debug\DemoMVC.csproj.CoreCompileInputs.cache
 D:\DemoMVC\obj\Debug\DemoMVC.csproj.CopyComplete
 D:\DemoMVC\obj\Debug\DemoMVC.dll
 D:\DemoMVC\obj\Debug\DemoMVC.pdb
+D:\DemoMVC\obj\Debug\DemoMVC.csproj.AssemblyReference.cache
+D:\DemoMVC\bin\EntityFramework.dll
+D:\DemoMVC\bin\EntityFramework.SqlServer.dll
+D:\DemoMVC\bin\EntityFramework.xml
+D:\DemoMVC\bin\EntityFramework.SqlServer.xml

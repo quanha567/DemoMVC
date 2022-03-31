@@ -9,8 +9,7 @@ namespace DemoMVC.Controllers
 {
     public class NguoiDungController : Controller
     {
-        
-        BookStoreDataContext data = new BookStoreDataContext();
+        BookStoreDataContext db = new BookStoreDataContext();
 
         // GET: NguoiDung
         public ActionResult Index()
@@ -18,75 +17,63 @@ namespace DemoMVC.Controllers
             return View();
         }
 
+        // GET: NguoiDung/Create
         [HttpGet]
-        public ActionResult DangKy()
+        public ActionResult Create()
         {
             return View();
         }
 
-        public ActionResult DangNhap()
-        {
-            return View();
-        }
-
+        // POST: NguoiDung/Create
         [HttpPost]
-        public ActionResult DangKy(FormCollection col, KHACHHANG kh)
+        public ActionResult Create(FormCollection collection)
         {
-            var HoTen = col["HotenKH"];
-            var TaiKhoan = col["TenDN"];
-            var Matkhau = col["Matkhau"];
-            var Matkhaunhaplai = col["Matkhaunhaplai"];
-            var DiachiKH = col["Diachi"];
-            var Email = col["Email"];
-            var DienthoaiKH = col["Dienthoai"];
-            var Ngaysinh = String.Format("{0:dd/MM/yyyy}", col["Ngaysinh"]);
+            try
+            {
+                // TODO: Add insert logic here
 
-            if(String.IsNullOrEmpty(HoTen))
-            {
-                ViewData["loi1"] = "Tên khách hàng không được bỏ trống";
-            } else if (String.IsNullOrEmpty(TaiKhoan))
-            {
-                ViewData["loi2"] = "Tên đăng nhập không được bỏ trống";
-            }
-            else if (String.IsNullOrEmpty(Matkhau))
-            {
-                ViewData["loi3"] = "Mật khẩu không được bỏ trống";
-            }
-            else if (String.IsNullOrEmpty(Matkhaunhaplai))
-            {
-                ViewData["loi4"] = "Nhập lại mật khẩu";
-            }
-            else if (String.IsNullOrEmpty(Email))
-            {
-                ViewData["loi5"] = "Tên khách hàng không được bỏ trống";
-            }
-            else if (String.IsNullOrEmpty(DienthoaiKH))
-            {
-                ViewData["loi6"] = "Email không được bỏ trống";
-            }
-            else if (String.IsNullOrEmpty(DiachiKH))
-            {
-                ViewData["loi7"] = "Địa chỉ không được bỏ trống";
-            }
-            else if (String.IsNullOrEmpty(Ngaysinh))
-            {
-                Ngaysinh = "1/1/2000";
-            }
-            else
-            {
-                kh.HoTen = HoTen;
-                kh.Taikhoan = TaiKhoan;
-                kh.Matkhau = Matkhau;
-                kh.Email = Email;
-                kh.DiachiKH = DiachiKH;
-                kh.DienthoaiKH = DienthoaiKH;
-                kh.Ngaysinh = DateTime.Parse(Ngaysinh);
+                KHACHHANG user = new KHACHHANG();
+                user.HoTen = collection["HoTen"];
+                user.Taikhoan = collection["TaiKhoan"];
+                user.Matkhau = collection["Matkhau"];
 
-                data.KHACHHANGs.InsertOnSubmit(kh);
-                data.SubmitChanges();
-                return RedirectToAction("Dang Nhap");
+                db.KHACHHANGs.InsertOnSubmit(user);
+                db.SubmitChanges();
+
+                return RedirectToAction("Index");
             }
-            return this.DangNhap();
+            catch
+            { 
+                return View();
+            }
+        }
+
+        public ActionResult DangNhap(FormCollection col)
+        {
+            var tendn = col["tendangnhap"];
+            var matkhau = col["matkhau"];
+
+            if (String.IsNullOrEmpty(tendn))
+            {
+                ViewData["loi1"] = "Phai nhap ten tai khoan";
+            } else if(String.IsNullOrEmpty(matkhau))
+            {
+                ViewData["loi2"] = "Phai nhap mat khau";
+            } else
+            {
+                KHACHHANG user = db.KHACHHANGs.SingleOrDefault(a => a.Taikhoan == tendn && a.Matkhau == matkhau);
+                if(user == null)
+                {
+                    ViewBag.ThongBao = "Ten dang nhap hoac mat khau khong dung!";
+                }
+                else
+                {
+                    ViewBag.ThongBao = "Chuc mung dang nhap thanh cong";
+                    Session["UserInfo"] = user;
+                }
+            }
+
+            return View();
         }
     }
 }
