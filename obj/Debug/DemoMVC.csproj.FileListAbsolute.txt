@@ -81,3 +81,7 @@ D:\DemoMVC\bin\EntityFramework.dll
 D:\DemoMVC\bin\EntityFramework.SqlServer.dll
 D:\DemoMVC\bin\EntityFramework.xml
 D:\DemoMVC\bin\EntityFramework.SqlServer.xml
+D:\DemoMVC\bin\PagedList.dll
+D:\DemoMVC\bin\PagedList.Mvc.dll
+D:\DemoMVC\bin\PagedList.xml
+D:\DemoMVC\bin\PagedList.Mvc.xml

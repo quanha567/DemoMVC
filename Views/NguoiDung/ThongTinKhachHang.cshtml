@@ -1,0 +1,43 @@
+﻿@using DemoMVC.Models;
+
+@{
+    ViewBag.Title = "ThongTinKhachHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    KHACHHANG user = (KHACHHANG)Session["UserInfo"];
+    
+}
+
+<h3 class="text-center text-danger">Thông Tin Khách Hàng</h3>
+
+<div>
+    <hr />
+    <table class="table table-hover">
+        <tr>
+            <th class="w-25">Họ Tên khách hàng:</th>
+            <td class="w-75">@user.HoTen.ToUpper()</td>
+        </tr>
+        <tr>
+            <th>Ngày sinh:</th>
+            <td>@if (user.Ngaysinh == null)
+            {
+               <span>trống</span>
+            }
+            else {
+
+                <span>@user.Ngaysinh</span>
+            }</td>
+        </tr>
+        <tr>
+            <th>Địa chỉ:</th>
+            <td>@user.DiachiKH</td>
+        </tr>
+        <tr>
+            <th>Điện thoại:</th>
+            <td>@user.DienthoaiKH</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>@user.Email</td>
+        </tr>
+    </table>
+</div>

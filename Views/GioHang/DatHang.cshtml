@@ -1,0 +1,88 @@
+﻿@using DemoMVC.Models
+@model List<GioHang>
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <h3 class="text-center text-danger">THÔNG TIN HÀNG HÓA</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">#ID</th>
+                <th scope="col" class="text-center w-50">Tên sách</th>
+                <th scope="col" class="text-center">Số lượng</th>
+                <th scope="col" class="text-center">Đơn giá</th>
+                <th scope="col" class="text-center">Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">@item.iMaSach</td>
+                    <td class="p-0">
+                        <a class="row text-decoration-none" href="@Url.Action("ChiTietSach", "BookStore", new { id = item.iMaSach})">
+                            <img src="~/Content/img/product/@item.sAnhBia" class="col-md-2" style="object-fit: contain; height: 100%;" />
+                            <span class="col-md-10">@item.sTenSach</span>
+                        </a>
+                    </td>
+                    <td class="text-center">@item.iSoLuong</td>
+                    <td class="text-center">@String.Format("{0:0,0}đ", item.dDonGia)</td>
+                    <td class="text-center">@String.Format("{0:0,0}đ", item.dThanhTien)</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3" class="text-danger">Tổng số lượng sách: @ViewBag.TongSoLuong</td>
+                <td colspan="2" class="text-center text-danger">Tổng tiền: @String.Format("{0:0,0}đ", ViewBag.TongTien)</td>
+            </tr>
+            <tr>
+                <td class="text-center" colspan="5">
+                    <a href="@Url.Action("GioHang", "GioHang")" class="btn btn-primary">Trở về giỏ hàng</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    @{ 
+        KHACHHANG kh = (KHACHHANG)Session["UserInfo"];
+    }
+    <h3 class="text-center text-danger">THÔNG TIN KHÁCH HÀNG</h3>
+    <table class="table table-hover">
+        <tbody>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+                {
+                    <tr>
+                        <th>Họ tên khách hàng:</th>
+                        <td>@kh.HoTen</td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ:</th>
+                        <td>@kh.DiachiKH</td>
+                    </tr>
+                    <tr>
+                        <th>Điện thoại:</th>
+                        <td>@kh.DienthoaiKH</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày đặt:</th>
+                        <td>@DateTime.Now.ToShortDateString()</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày giao</th>
+                        <td><input type="date" name="ngaygiao"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <button type="submit" class="btn btn-primary">Đồng ý đặt hàng</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

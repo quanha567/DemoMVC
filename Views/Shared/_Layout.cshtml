@@ -11,6 +11,25 @@
         .card:hover {
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
         }
+
+        .pagination .active, .pagination li:hover {
+            background: #0dcaf0;
+        }
+
+        .pagination li {
+            border: 1px solid black;
+            padding: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination li a{
+            text-decoration: none;
+            color: black;
+        }
     </style>
 </head>
 <body class="container">
@@ -27,10 +46,17 @@
                     <ul class="navbar-nav mb-2 ms-4 mb-lg-0 text-center w-75 d-flex justify-content-evenly">
                     </ul>
                 </div>
-                <div>
-                    <a href="@Url.Action("Create", "NguoiDung")" class="text-light text-decoration-none" style="font-weight: 500; font-size: 16px">Đăng Ký</a>
-                    <a href="@Url.Action("DangNhap", "NguoiDung")" class="text-light text-decoration-none" style="font-weight: 500; font-size: 16px">||Đăng Nhập ||</a>
-                    @Html.Action("ThongTinGiohang", "GioHang")
+                <div class="d-flex align-items-center">
+                    @if (Session["UserInfo"] != null)
+                    {
+                        @Html.Action("Avata", "NguoiDung")
+                        @Html.Action("ThongTinGiohang", "GioHang")
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Create", "NguoiDung")" class="text-light text-decoration-none me-3" style="font-weight: 500; font-size: 16px">Đăng Ký</a>
+                        <a href="@Url.Action("DangNhap", "NguoiDung")" class="text-light text-decoration-none me-3" style="font-weight: 500; font-size: 16px">Đăng Nhập</a>
+                    }
                 </div>
             </div>
         </nav>

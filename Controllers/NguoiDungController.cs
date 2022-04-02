@@ -68,11 +68,21 @@ namespace DemoMVC.Controllers
                 }
                 else
                 {
-                    ViewBag.ThongBao = "Chúc mừng đăng nhập thành công!";
                     Session["UserInfo"] = user;
+                    return RedirectToAction("Index", "BookStore");
                 }
             }
 
+            return View();
+        }
+
+        public ActionResult Avata()
+        {
+            return PartialView();
+        }
+
+        public ActionResult ThongTinKhachHang()
+        {
             return View();
         }
     }

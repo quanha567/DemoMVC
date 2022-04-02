@@ -1,0 +1,11 @@
+﻿@using DemoMVC.Models;
+@{ 
+    KHACHHANG user = (KHACHHANG)Session["UserInfo"];
+}
+
+<a style="width: 35px; height: 35px; border-radius: 100rem; font-weight: 500; font-size: 25px;"
+    class="bg-light d-flex justify-content-center align-items-center me-3 text-decoration-none text-dark" 
+   href="@Url.Action("ThongTinKhachHang")"
+   >
+@user.HoTen.Substring(0, 1)
+</a>

@@ -10,13 +10,13 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col" class="text-center">#ID</th>
-                <th scope="col" class="text-center w-50">Tên sách</th>
-                <th scope="col" class="text-center">Số lượng</th>
-                <th scope="col" class="text-center">Đơn giá</th>
-                <th scope="col" class="text-center">Thành tiền</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col" class="text-center" style="width: 5%">#ID</th>
+                <th scope="col" class="text-center" style="width: 40%">Tên sách</th>
+                <th scope="col" class="text-center" style="width: 10%">Số lượng</th>
+                <th scope="col" class="text-center" style="width: 10%">Đơn giá</th>
+                <th scope="col" class="text-center" style="width: 10%">Thành tiền</th>
+                <th scope="col" style="width: 10%"></th>
+                <th scope="col" style="width: 15%"></th>
             </tr>
         </thead>
         <tbody>
@@ -38,11 +38,11 @@
                 @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSach = item.iMaSach}))
                 {
                     <td class="text-center">
-                        <input value="@item.iSoLuong" type="number" min="1" name="soluong" class="text-center   " />
+                        <input value="@item.iSoLuong" type="number" min="1" name="soluong" class="text-center w-100" />
                     </td>
                     <td class="text-center">@String.Format("{0:0,0}đ", item.dDonGia)</td>
                     <td class="text-center">@String.Format("{0:0,0}đ", item.dThanhTien)</td>
-                    <td class="text-center">@Html.ActionLink("Xóa", "XoaSanPham", new { @iMaSach = item.iMaSach })</td>
+                    <td class="text-center">@Html.ActionLink("Xóa", "XoaSanPham", new { @iMaSach = item.iMaSach }, new { @class="btn btn-primary"})</td>
                     <td>
                         <button type="submit" class="text-center btn btn-primary">Cập nhật</button>
                     </td>
@@ -52,6 +52,11 @@
             <tr>
                 <td colspan="4" class="text-danger">Tổng số lượng sách: @ViewBag.TongSoLuong</td>
                 <td colspan="3" class="text-center text-danger">Tổng tiền: @String.Format("{0:0,0}đ", ViewBag.TongTien)</td>
+            </tr>
+            <tr>
+                <td class="text-center" colspan="7">
+                    <a href="@Url.Action("DatHang", "GioHang")" class="btn btn-primary">Đặt hàng</a>
+                </td>
             </tr>
         </tbody>
     </table>

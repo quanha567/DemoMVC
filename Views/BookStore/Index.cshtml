@@ -1,5 +1,6 @@
-﻿@model IEnumerable<DemoMVC.Models.SACH>
-
+﻿@using DemoMVC.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SACH>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -34,4 +35,8 @@
             </div>
         }
     </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page}))
 </div>

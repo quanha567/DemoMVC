@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DemoMVC.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace DemoMVC.Controllers
 {
@@ -18,10 +20,13 @@ namespace DemoMVC.Controllers
         }
 
         // GET: BookStore
-        public ActionResult Index()
+        public ActionResult Index(int ? page)
         {
+            int pageSize = 12;
+            int pageNum = (page ?? 1);
+
             var list_product = GetNewProduct(10);
-            return View(list_product);
+            return View(list_product.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult ChuDe()

@@ -9,8 +9,7 @@ namespace DemoMVC.Controllers
 {
     public class GioHangController : Controller
     {
-        BookStoreController db = new BookStoreController();
-        
+        BookStoreDataContext db = new BookStoreDataContext();
         // GET: GioHang
         List<GioHang> LayGioHang()
         {
@@ -116,6 +115,59 @@ namespace DemoMVC.Controllers
             giohang.Clear();
 
             return RedirectToAction("Index", "BookStore");
+        }
+
+        [HttpGet]
+        public ActionResult DatHang()
+        {
+            if(Session["UserInfo"] == null || Session["UserInfo"].ToString() == null)
+            {
+                return RedirectToAction("DangNhap", "NguoiDung");
+            }
+            if(Session["GioHang"] == null)
+            {
+                return RedirectToAction("Index", "BookStore");
+            }
+
+            List<GioHang> giohang = LayGioHang();
+            ViewBag.TongSoLuong = TinhTongSoLuong();
+            ViewBag.TongTien = TinhTongTien();
+
+            return View(giohang);
+        }
+        [HttpPost]
+        public ActionResult DatHang(FormCollection col)
+        {
+            DONDATHANG dondat = new DONDATHANG();
+            KHACHHANG kh = (KHACHHANG)Session["UserInfo"];
+            List<GioHang> giohang = LayGioHang();
+            dondat.MaKH = kh.MaKH;
+            dondat.Ngaydat = DateTime.Now;
+            var ngaygiao = String.Format("{0:dd/MM/yyyy}", col["ngaygiao"]);
+            dondat.Ngaygiao = DateTime.Parse(ngaygiao);
+            dondat.Tinhtranggiaohang = false;
+            dondat.Dathanhtoan = false;
+            db.DONDATHANGs.InsertOnSubmit(dondat);
+            db.SubmitChanges();
+
+            foreach(var item in giohang)
+            {
+                CHITIETDONTHANG chitiet = new CHITIETDONTHANG();
+                chitiet.MaDonHang = dondat.MaDonHang;
+                chitiet.Masach = item.iMaSach;
+                chitiet.Soluong = item.iSoLuong;
+                chitiet.Dongia = (decimal)item.dDonGia;
+                db.CHITIETDONTHANGs.InsertOnSubmit(chitiet);
+            }
+            db.SubmitChanges();
+            Session["giohang"] = null;
+
+            return RedirectToAction("XacNhanDonhang", "Giohang");
+        }
+
+        public ActionResult XacNhanDonHang()
+        {
+            return View();
         }
     }
 }
